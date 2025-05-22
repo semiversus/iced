@@ -52,7 +52,7 @@ impl Pipeline {
                     opacity,
                     ..tiny_skia::PixmapPaint::default()
                 },
-                Transform::from_scale(1.0, 1.0),
+                Transform::default(),
                 clip_mask,
             );
         }
