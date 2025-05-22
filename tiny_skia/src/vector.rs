@@ -43,12 +43,7 @@ impl Pipeline {
             handle,
             color,
             Size::new((bounds.width * transform.sx) as u32, (bounds.height * transform.sy) as u32),
-            //Size::new(bounds.width as u32, bounds.height as u32),
         ) {
-            let mut new_transform = transform.clone();
-            new_transform.sx = 1.0;
-            new_transform.sy = 1.0;
-
             pixels.draw_pixmap(
                 (bounds.x * transform.sx) as i32,
                 (bounds.y * transform.sy) as i32,
@@ -57,7 +52,7 @@ impl Pipeline {
                     opacity,
                     ..tiny_skia::PixmapPaint::default()
                 },
-                new_transform,
+                Transform::from_scale(1.0, 1.0),
                 clip_mask,
             );
         }
