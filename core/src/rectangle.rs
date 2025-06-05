@@ -137,7 +137,6 @@ impl Rectangle<f32> {
     }
 
     /// Returns true if the given [`Point`] is contained in the [`Rectangle`].
-    /// Excludes the right and bottom edges.
     pub fn contains(&self, point: Point) -> bool {
         self.x <= point.x
             && point.x < self.x + self.width
@@ -183,13 +182,13 @@ impl Rectangle<f32> {
         )
     }
 
-    /// Returns true if the current [`Rectangle`] is within the given
-    /// `container`. Includes the right and bottom edges.
+    /// Returns true if the current [`Rectangle`] is completely within the given
+    /// `container`.
     pub fn is_within(&self, container: &Rectangle) -> bool {
-        self.x >= container.x
-            && self.y >= container.y
-            && self.x + self.width <= container.x + container.width
-            && self.y + self.height <= container.y + container.height
+        container.contains(self.position())
+            && container.contains(
+                self.position() + Vector::new(self.width, self.height),
+            )
     }
 
     /// Computes the intersection with the given [`Rectangle`].
